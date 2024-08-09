@@ -4,7 +4,7 @@
   "description": "igniting the app",
 
   "scripts": {
-    "parcel":"npx parcel index.html",
+    "parcel":"parcel index.html",
     "test": "jest"
   },
   "author": "vatsh",
