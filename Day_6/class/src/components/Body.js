@@ -14,24 +14,30 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    // const data = await fetch(
-    //   "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING"
-    // );
-    //   const data = await fetch(
-    //     "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING"
-    //   );
-
     //   const data = await fetch(
     //     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING"
     //   );
 
+    // const data = await fetch(
+    //   "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING"
+    // );
+
     try {
-      const data = await fetch("http://localhost:5000/resList");
+      //   const data = await fetch("http://localhost:5000/resList");
+
+      const data = await fetch(
+        "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING"
+      );
 
       const json = await data.json();
       //   console.log(json);
 
-      const restaurants = json || [];
+      //   const restaurants = json || [];
+      //   console.log(restaurants);
+
+      const restaurants =
+        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants ||
+        [];
       console.log(restaurants);
 
       // Update state with fetched restaurant data
@@ -95,8 +101,11 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredRestaurant.map((restaurant) => (
+        {/* {filteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.data.id} resData={restaurant} />
+        ))} */}
+        {filteredRestaurant.map((restaurant) => (
+          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
     </div>
